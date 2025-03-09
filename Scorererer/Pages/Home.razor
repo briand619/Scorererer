@@ -1,0 +1,104 @@
+﻿@page "/"
+@inject IDialogService DialogService
+
+<PageTitle>Home</PageTitle>
+<div class="container">
+    <div class="scoreboard">
+        <div class="player1" @onclick="IncrementPlayer1Score">
+            <div class="score">@Player1Score</div>
+            <div class="undo">
+                <FluentButton Color="#fff" BackgroundColor="#1b6ec2" StopPropagation="true" Style="font-weight: bolder;" IconEnd="@(new Microsoft.FluentUI.AspNetCore.Components.Icons.Regular.Size20.ArrowUndo())" OnClick="() => DecrementPlayer1Score()" />
+            </div>
+        </div>
+        <div class="player2" @onclick="IncrementPlayer2Score">
+            <div class="score">@Player2Score</div>
+            <div class="undo">
+                <FluentButton Color="#fff" BackgroundColor="#b32121" StopPropagation="true" Style="font-weight: bolder;" IconEnd="@(new Microsoft.FluentUI.AspNetCore.Components.Icons.Regular.Size20.ArrowUndo())" OnClick="() => DecrementPlayer2Score()" />
+            </div>
+        </div>
+        <div class="reset" @onclick="ResetScores">
+            RESET
+        </div>
+    </div>
+
+</div>
+
+@code
+{
+    public int Player1Score { get; set; } = 0;
+    public int Player2Score { get; set; } = 0;
+
+    public string Player1Name { get; set; } = "Player 1";
+    public string Player2Name { get; set; } = "Player 2";
+    public string Player1InputClass { get; set; } = "hide";
+    public string Player2InputClass { get; set; } = "hide";
+
+    private void ChangePlayer1Name(MouseEventArgs obj)
+    {
+        var o = obj;
+        Player1InputClass = "show";
+    }
+
+    private void ChangePlayer2Name(MouseEventArgs obj)
+    {
+        var o = obj;
+        Player2InputClass = "show";
+    }
+
+    private void AcceptPlayer1Name(FocusEventArgs obj)
+    {
+        Player1InputClass = "hide";
+    }
+
+    private void AcceptPlayer2Name(FocusEventArgs obj)
+    {
+        Player2InputClass = "hide";
+    }
+
+    private void IncrementPlayer1Score()
+    {
+        Player1Score++;
+    }
+
+    private void IncrementPlayer2Score()
+    {
+        Player2Score++;
+    }
+
+    private async Task ResetScores()
+    {
+        DialogParameters parameters = new()
+            {
+                Title = "Reset scores?",
+                PrimaryAction = "Yes",
+                PrimaryActionEnabled = true,
+                SecondaryAction = "Cancel",
+                Modal = true,
+                PreventScroll = true,
+            };
+
+        var dialog = await DialogService.ShowConfirmationAsync("Reset scores?");
+        var result = await dialog.Result;
+
+        if (!result.Cancelled)
+        {
+            Player1Score = Player2Score = 0;
+        }
+    }
+
+    private void DecrementPlayer2Score()
+    {
+        if (Player2Score > 0)
+        {
+            Player2Score--;
+        }
+    }
+
+    private void DecrementPlayer1Score()
+    {
+        if (Player1Score > 0)
+        {
+            Player1Score--;
+        }
+    }
+}
