@@ -717,7 +717,7 @@ kbd {
     .reset {
         font-size: 3vh;
         right: 2vh;
-        top: 1vh;
+        top: 2vh;
     }
     .undo {
         bottom: 2vh;
@@ -739,7 +739,7 @@ kbd {
     .reset {
         font-size: 3vw;
         right: 2vw;
-        top: 1vw;
+        top: 2vw;
     }
     .undo {
         bottom: 2vw;
