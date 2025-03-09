@@ -16,7 +16,9 @@
                 <FluentButton Color="#fff" BackgroundColor="#b32121" StopPropagation="true" Style="font-weight: bolder;" IconEnd="@(new Microsoft.FluentUI.AspNetCore.Components.Icons.Regular.Size20.ArrowUndo())" OnClick="() => DecrementPlayer2Score()" />
             </div>
         </div>
-        <FluentButton Class="reset" BackgroundColor="#b32121" OnClick="ResetScores">RESET</FluentButton>
+        <div class="reset">
+            <FluentButton BackgroundColor="#b32121" OnClick="ResetScores">RESET</FluentButton>
+        </div>
     </div>
 
 </div>
