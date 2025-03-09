@@ -1,10 +1,14 @@
 ﻿@import '/_content/Microsoft.FluentUI.AspNetCore.Components/css/reboot.css';
 
+* {
+    touch-action: none;
+}
+
 body {
     height: 100%;
     overflow: hidden;
     user-select: none;
-    touch-action: none;
+
 }
 
 blockquote p:last-child {
@@ -725,11 +729,11 @@ kbd {
     .scoreboard {
         display: grid;
         grid-template-rows: 1fr 1fr;
-        grid-template-columns: 100vw;
+        grid-template-columns: 1fr;
         grid-template-areas: "player1"
                              "player2";
-        width: 100%;
-        height: 100%;
+        width: 100vw;
+        height: 100vh;
     }
     .reset {
         font-size: 3vw;
@@ -749,12 +753,16 @@ kbd {
     font-weight: bolder;
     color: #fff;
     font-size: 25vh;
-    justify-items: center;
+/*    justify-items: center;*/
+    -moz-align-content: center;
+    -o-align-content: center;
+    -webkit-align-content: center;
     align-content: center;
     width: 100%;
     height: 100%;
     position: relative;
 }
+
 /*.player1, .player2 {
     display: grid;
     grid-template-rows: 10vh 85vh 5vh;
@@ -779,6 +787,9 @@ kbd {
     padding: 1vh;
 }
 
+.score {
+    text-align: center;
+}
 .options {
     grid-area: options;
     display: grid;
